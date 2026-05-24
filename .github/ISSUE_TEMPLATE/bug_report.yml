@@ -1,0 +1,69 @@
+name: Bug report
+description: Report a reproducible setup-local-ydb problem.
+title: "Bug: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include passwords, tokens, private repository names, or sensitive runner logs.
+  - type: input
+    id: action-version
+    attributes:
+      label: Action version
+      description: For example, astandrik/setup-local-ydb@v1.
+      placeholder: astandrik/setup-local-ydb@v1
+    validations:
+      required: true
+  - type: input
+    id: local-ydb-version
+    attributes:
+      label: local-ydb version input
+      placeholder: 26.1.1.6
+    validations:
+      required: true
+  - type: input
+    id: tenant
+    attributes:
+      label: Tenant input
+      placeholder: /local/test
+    validations:
+      required: true
+  - type: dropdown
+    id: auth
+    attributes:
+      label: auth input
+      options:
+        - "false"
+        - "true"
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow snippet
+      description: Include only the relevant setup-local-ydb step and nearby test step.
+      render: yaml
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Redact secrets before posting.
+      render: text
+    validations:
+      required: false

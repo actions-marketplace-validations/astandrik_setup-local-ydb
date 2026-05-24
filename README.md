@@ -2,7 +2,9 @@
 
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-setup--local--ydb-blue?logo=github)](https://github.com/marketplace/actions/setup-local-ydb)
 
-GitHub Action for starting a Docker-based `local-ydb` stack in CI.
+Provision local YDB in GitHub Actions CI.
+
+This action starts a Docker-based `local-ydb` stack on a Linux runner and exports connection settings for later workflow steps.
 
 ```yaml
 steps:
@@ -65,3 +67,9 @@ The same values are also exported as `LOCAL_YDB_ENDPOINT`, `LOCAL_YDB_DATABASE`,
 - All host ports are bound to `127.0.0.1`.
 - Prefer exact image tags for reproducible CI.
 - SSH profiles, MCP tools, storage migration, version upgrades, dump/restore, and remote-host operations are outside v1 scope.
+
+## Support
+
+- Questions, bugs, and feature requests: [GitHub Issues](https://github.com/astandrik/setup-local-ydb/issues).
+- Security reports: see [SECURITY.md](SECURITY.md).
+- Related project: [`local-ydb-toolkit`](https://github.com/astandrik/local-ydb-toolkit).
