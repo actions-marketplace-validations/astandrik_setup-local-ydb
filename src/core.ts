@@ -6,8 +6,9 @@ export interface InputOptions {
 }
 
 export function getInput(name: string, options: InputOptions = {}): string {
-  const key = `INPUT_${name.replace(/ /g, "_").replace(/-/g, "_").toUpperCase()}`;
-  const value = process.env[key] ?? "";
+  const key = `INPUT_${name.replace(/ /g, "_").toUpperCase()}`;
+  const legacyKey = `INPUT_${name.replace(/[ -]/g, "_").toUpperCase()}`;
+  const value = process.env[key] ?? process.env[legacyKey] ?? "";
   if (options.required && value.trim() === "") {
     throw new Error(`Input required and not supplied: ${name}`);
   }
@@ -90,4 +91,3 @@ function escapeCommandData(value: string): string {
     .replace(/\r/g, "%0D")
     .replace(/\n/g, "%0A");
 }
-

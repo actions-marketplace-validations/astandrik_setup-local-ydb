@@ -64,8 +64,9 @@ exports.group = group;
 const node_fs_1 = __nccwpck_require__(3024);
 const node_crypto_1 = __nccwpck_require__(7598);
 function getInput(name, options = {}) {
-    const key = `INPUT_${name.replace(/ /g, "_").replace(/-/g, "_").toUpperCase()}`;
-    const value = process.env[key] ?? "";
+    const key = `INPUT_${name.replace(/ /g, "_").toUpperCase()}`;
+    const legacyKey = `INPUT_${name.replace(/[ -]/g, "_").toUpperCase()}`;
+    const value = process.env[key] ?? process.env[legacyKey] ?? "";
     if (options.required && value.trim() === "") {
         throw new Error(`Input required and not supplied: ${name}`);
     }
