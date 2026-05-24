@@ -33,6 +33,16 @@ Enable native YDB auth when your tests need authenticated behavior:
     auth: true
 ```
 
+## Examples
+
+- [Basic local YDB workflow](examples/basic.yml)
+- [Native auth workflow](examples/auth.yml)
+- [Node.js integration tests](examples/node-tests.yml)
+
+## Versioning
+
+Use `astandrik/setup-local-ydb@v1` to receive compatible v1 updates. Pin an immutable release such as `astandrik/setup-local-ydb@v1.0.0` when a workflow needs fully reproducible action code.
+
 ## Inputs
 
 | Name | Default | Description |

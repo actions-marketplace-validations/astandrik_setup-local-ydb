@@ -1,0 +1,31 @@
+name: local-ydb auth
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Start local YDB with auth
+        id: ydb
+        uses: astandrik/setup-local-ydb@v1
+        with:
+          version: 26.1.1.6
+          tenant: /local/test
+          auth: true
+
+      - name: Run authenticated tests
+        env:
+          YDB_ENDPOINT: ${{ steps.ydb.outputs.endpoint }}
+          YDB_DATABASE: ${{ steps.ydb.outputs.database }}
+          YDB_USER: ${{ steps.ydb.outputs.username }}
+          YDB_PASSWORD_FILE: ${{ steps.ydb.outputs.password-file }}
+        run: |
+          test -n "${YDB_ENDPOINT}"
+          test "${YDB_DATABASE}" = "/local/test"
+          test "${YDB_USER}" = "root"
+          test -s "${YDB_PASSWORD_FILE}"
+          # Run your authenticated integration test command here.

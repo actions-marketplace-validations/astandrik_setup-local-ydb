@@ -1,0 +1,26 @@
+name: local-ydb basic
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Start local YDB
+        id: ydb
+        uses: astandrik/setup-local-ydb@v1
+        with:
+          version: 26.1.1.6
+          tenant: /local/test
+
+      - name: Check exported connection settings
+        run: |
+          test -n "${LOCAL_YDB_ENDPOINT}"
+          test "${LOCAL_YDB_DATABASE}" = "/local/test"
+          curl --fail --silent --show-error "${LOCAL_YDB_MONITORING_URL}/viewer/json/capabilities?database=%2Flocal%2Ftest" >/tmp/local-ydb-capabilities.json
