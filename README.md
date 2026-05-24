@@ -1,5 +1,7 @@
 # setup-local-ydb
 
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-setup--local--ydb-blue?logo=github)](https://github.com/marketplace/actions/setup-local-ydb)
+
 GitHub Action for starting a Docker-based `local-ydb` stack in CI.
 
 ```yaml
@@ -11,7 +13,6 @@ steps:
     with:
       version: 26.1.1.6
       tenant: /local/test
-      auth: true
 
   - run: |
       echo "$LOCAL_YDB_ENDPOINT"
@@ -19,6 +20,16 @@ steps:
 ```
 
 The action starts `ghcr.io/ydb-platform/local-ydb`, creates a CMS tenant database such as `/local/test`, waits until the tenant metadata is reachable, and exports connection settings for later steps.
+
+Enable native YDB auth when your tests need authenticated behavior:
+
+```yaml
+- uses: astandrik/setup-local-ydb@v1
+  with:
+    version: 26.1.1.6
+    tenant: /local/test
+    auth: true
+```
 
 ## Inputs
 
@@ -54,4 +65,3 @@ The same values are also exported as `LOCAL_YDB_ENDPOINT`, `LOCAL_YDB_DATABASE`,
 - All host ports are bound to `127.0.0.1`.
 - Prefer exact image tags for reproducible CI.
 - SSH profiles, MCP tools, storage migration, version upgrades, dump/restore, and remote-host operations are outside v1 scope.
-
